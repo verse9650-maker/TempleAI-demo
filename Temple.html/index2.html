@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TempleAI – Smart Pilgrimage Planner</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
+    color: white;
+    line-height: 1.6;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    padding: 20px 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.7);
+}
+
+nav h2 {
+    color: #facc15;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    background: linear-gradient(135deg, #7f1d1d, #1e293b);
+}
+
+.hero h1 {
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.hero p {
+    margin-top: 20px;
+    font-size: 20px;
+    color: #cbd5e1;
+    max-width: 700px;
+}
+
+.btn {
+    margin-top: 30px;
+    padding: 14px 28px;
+    background: #facc15;
+    color: black;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+section {
+    padding: 100px 10%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 36px;
+    color: #facc15;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background: #334155;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+}
+
+.demo-box {
+    background: #1e293b;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: auto;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: #facc15;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    background: #334155;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    background: #020617;
+    color: #94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>🛕 TempleAI</h2>
+    <div>
+        <a href="#features">Features</a>
+        <a href="#demo">Demo</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>Plan Your Spiritual Journey Smarter</h1>
+    <p>
+        India’s first intelligent multi-language pilgrimage planner.
+        Save time. Avoid confusion. Travel with clarity.
+    </p>
+    <a href="#demo" class="btn">Try Live Demo</a>
+</div>
+
+<section id="features">
+    <h2 class="section-title">Why TempleAI?</h2>
+    <div class="features">
+        <div class="card">
+            <h3>🧠 Smart Itinerary</h3>
+            <p>AI-powered temple planning based on time and location.</p>
+        </div>
+        <div class="card">
+            <h3>🌍 Multi-Language Guide</h3>
+            <p>Understand temple history in your preferred language.</p>
+        </div>
+        <div class="card">
+            <h3>📊 Budget Estimation</h3>
+            <p>Know your estimated expenses before you travel.</p>
+        </div>
+        <div class="card">
+            <h3>📍 Nearby Suggestions</h3>
+            <p>Stay, food & transport recommendations.</p>
+        </div>
+    </div>
+</section>
+
+<section id="demo">
+    <h2 class="section-title">Live Demo</h2>
+    <div class="demo-box">
+        <input type="text" id="city" placeholder="Starting City">
+        <select id="days">
+            <option value="1">1 Day</option>
+            <option value="2">2 Days</option>
+            <option value="3">3 Days</option>
+        </select>
+        <select id="language">
+            <option>English</option>
+            <option>Hindi</option>
+            <option>Telugu</option>
+        </select>
+        <button onclick="generatePlan()">Generate Plan</button>
+
+        <div id="result" class="result" style="display:none;"></div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2 class="section-title">Join Early Access</h2>
+    <div class="demo-box">
+        <input type="email" placeholder="Enter your email">
+        <button>Join Waitlist</button>
+    </div>
+</section>
+
+<footer>
+    © 2026 TempleAI | Built by Umesh 🚀
+</footer>
+
+<script>
+const temples = [
+    { name: "Tirupati Temple", budget: "₹3000 - ₹5000" },
+    { name: "Meenakshi Temple", budget: "₹4000 - ₹6000" },
+    { name: "Kashi Vishwanath Temple", budget: "₹5000 - ₹7000" }
+];
+
+function generatePlan() {
+    const city = document.getElementById("city").value;
+    const days = document.getElementById("days").value;
+    const language = document.getElementById("language").value;
+
+    let output = `<strong>From:</strong> ${city}<br><strong>Language:</strong> ${language}<hr>`;
+
+    for (let i = 0; i < days && i < temples.length; i++) {
+        output += `<strong>Day ${i+1}:</strong> ${temples[i].name}<br>`;
+        output += `Estimated Budget: ${temples[i].budget}<hr>`;
+    }
+
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = output;
+    resultDiv.style.display = "block";
+}
+</script>
+
+</body>
+</html>
